@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+  </head>
+  <body>
+
+    <!-- nav bar -->
+    <nav class="bg-white p-2 drop-shadow-2xl">
+      <div class="flex justify-center space-x-10 font-mono text-xl">
+        <a href="card-flipper.html" class="hover:cursor-pointer hover:underline">simple</a>
+        <a href="card-flipper2.html" class="hover:cursor-pointer hover:underline">hex</a>
+      </div>
+    </nav>
+
+    <!-- centered flex container -->
+    <main class="flex flex-col justify-center  space-y-2 items-center h-screen  p-4">
+      <div class="container">
+        <h2 id="h2" class="text-center text-blue-50 font-mono text-2xl focus:white  ">Background-color:<span id="colorcode"></span></h2>
+      </div>
+      <button id="btn" class="w-40     rounded-lg hover:border-2 hover:border-black  transition-colors  duration-300 bg-black px-2 font-mono text-2xl text-white hover:text-black hover:bg-white ">Click me!</button>
+    </main>
+  </body>
+</html>
+
+<script>
+  //using these array we are going to create random hex values
+    const color=["orange-700","black","pink-300","blue-950"];
+    const btn=document.getElementById("btn");
+    const h2=document.getElementById("h2");
+    const colorid=document.getElementById("colorcode");
+
+    const messages=[];
+    
+
+     
+
+    btn.addEventListener("click", (event)=>{
+        event.preventDefault();
+
+        let randomnumber=random();
+        document.body.className=`bg-${color[randomnumber]}`;
+        colorid.innerHTML=`bg-${color[randomnumber]}`;
+
+
+
+
+        
+    messages.push(randomnumber)
+    console.log(messages)
+    localStorage.setItem("data",JSON.stringify(messages))
+
+    
+    })
+
+    //get the locally stored data
+    function getdata(){
+      const store=localStorage.getItem("data");
+      //console.log(store)
+
+      if(store){
+        const datas=JSON.parse(localStorage.getItem("data"))
+        //console.log(datas)
+
+        //accessing the maximum length and do the - operation to get the latest color
+        const latestcolor=datas[datas.length-1];
+        
+        document.body.className=`bg-${color[latestcolor]}`;
+        colorid.innerHTML=`bg-${color[latestcolor]}`;
+      }
+    }
+
+    getdata();
+
+
+    function random(){
+        return Math.floor(Math.random()*color.length);
+    }
+
+
+
+</script>

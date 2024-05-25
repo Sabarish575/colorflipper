@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+  </head>
+  <body>
+    <!-- nav bar -->
+    <nav class="bg-white p-2 drop-shadow-2xl">
+      <div class="flex justify-center space-x-10 font-mono text-xl">
+        <a href="card-flipper.html" class="hover:cursor-pointer hover:underline">simple</a>
+        <a href="card-flipper2.html" class="hover:cursor-pointer hover:underline">hex</a>
+      </div>
+    </nav>
+
+    <!-- centered flex container -->
+    <main class="flex flex-col justify-center  space-y-2 items-center h-screen  p-4">
+      <div class="container p-1 rounded-2xl mx-auto">
+        <h2 id="h2" class="text-center text-blue-50 font-mono text-2xl  ">Background-color:<span id="colorcode"></span></h2>
+      </div>
+      <button id="btn" class="w-40 rounded-lg hover:border-2 hover:border-black  hover:transition-colors duration-75 bg-black px-2 font-mono text-2xl text-white hover:text-black hover:bg-white">Click me!</button>
+    </main>
+  </body>
+</html>
+
+<script>
+
+  //using these array we are going to create random hex values
+    const color=['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+
+    const btn=document.getElementById("btn");
+    const h2=document.getElementById("h2");
+    const colorid=document.getElementById("colorcode")
+    const messages=[]
+
+    btn.addEventListener("click", (event)=>{
+        event.preventDefault();
+
+        let hexcolor="#";
+
+        //it will sequentially gives the number form 0 to 5 a basic loop and also we are passing the random()
+        
+        for(let i=0;i<6;i++){
+
+            hexcolor+=color[random()]; //random function will create random numbers between 0 to 15 so that we can pass these number as index value to access the color array
+           
+        }
+        
+        document.body.style.backgroundColor=hexcolor;
+        colorid.innerHTML=`bg-${hexcolor}`;
+        
+        //pushing the hexcolor to array
+        messages.push(hexcolor)
+
+        //since setItem accepts we are stringify it..
+        localStorage.setItem("data",JSON.stringify(messages));
+    })
+    
+    //get the locally stored data
+    function displaystore(){
+
+      const storedata=localStorage.getItem("data");
+      if(storedata){
+        const arrayindex=JSON.parse(localStorage.getItem("data"));
+
+        //since it is a array of future colors we are going to do len-1 so that we could get the latest color
+        const getcolor=arrayindex[arrayindex.length-1];
+
+        //console.log(getcolor)
+        document.body.style.backgroundColor=getcolor;
+        colorid.innerHTML=`bg-${getcolor}`;
+      }
+    }
+
+    displaystore()
+
+    function random(){
+        return Math.floor(Math.random()*color.length);
+    }
+
+
+
+</script>
