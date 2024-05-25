@@ -8,9 +8,11 @@ The webpage also displays the selected color code in the heading and remembers t
 -> Click the button to change the background color.
 
 ## Technologies Used
- HTML
- CSS
-JavaScript
+<ul>
+ <li>HTML</li>
+ <li>tailwind css</li>
+ <li>javascript</li>
+</ul>
 
 ## Additional Information
 You can customize the predefined colors in the JavaScript code (const color = [...]).
