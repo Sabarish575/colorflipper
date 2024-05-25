@@ -8,9 +8,9 @@ The webpage also displays the selected color code in the heading and remembers t
 -> Click the button to change the background color.
 
 ## Technologies Used
--> HTML
--> CSS
--> JavaScript
+ HTML
+ CSS
+JavaScript
 
 ## Additional Information
 You can customize the predefined colors in the JavaScript code (const color = [...]).
